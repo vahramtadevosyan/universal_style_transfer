@@ -1,12 +1,14 @@
+import os
 import torch
-from torch.utils.data import Dataset, DataLoader
+from PIL import Image
 from torchvision import transforms, datasets
+from torch.utils.data import Dataset, DataLoader
 
 class UnpairedDataset(Dataset):
 	def __init__(self, root_dir, max_side=768):
 		self.root_dir = root_dir
 		self.max_side = max_side
-		self.image_folder = datasets.ImageFolder(root=self.root_dir)
+		self.images = os.listdir(root_dir)
 		self.transform = transforms.Compose([
 			transforms.Lambda(lambda x: self._resize_and_pad(x)),
 			transforms.ToTensor(),
@@ -31,10 +33,11 @@ class UnpairedDataset(Dataset):
 		return image
 
 	def __len__(self):
-		return len(self.image_folder)
+		return len(self.images)
 
 	def __getitem__(self, idx):
-		image, _ = self.image_folder[idx]
+		img_name = os.path.join(self.root_dir, self.images[idx])
+		image = Image.open(img_name).convert('RGB')
 		image = self._resize_and_pad(image)
 		if self.transform:
 			image = self.transform(image)

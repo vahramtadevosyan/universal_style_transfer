@@ -13,6 +13,7 @@ class Encoder(nn.Module):
 		self.model = encoders[depth-1]
 		if load_weights:
 			state_dict = torch.load(f'models/encoders/encoder{self.depth}.pth')
+			state_dict = {'.'.join(k.split('.')[-2:]): v for k, v in state_dict.items()}			
 			self.model.load_state_dict(state_dict)
 
 	def forward(self, x):
@@ -26,7 +27,8 @@ class Decoder(nn.Module):
 		self.depth = int(depth)
 		self.model = decoders[depth-1]
 		if load_weights:
-			state_dict = torch.load(f'models/decoders/decoder{self.depth}.pth')
+			state_dict = torch.load(f'checkpoints/decoder{self.depth}.pth')
+			state_dict = {'.'.join(k.split('.')[-2:]): v for k, v in state_dict.items()}
 			self.model.load_state_dict(state_dict)
 
 	def forward(self, x):

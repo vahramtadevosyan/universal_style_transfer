@@ -10,7 +10,6 @@ def main():
 
     with open(args.config, 'r') as file:
         config = json.load(file)
-
     trainer = Trainer(depth=args.depth, config=config)
     trainer.train()
 
