@@ -1,0 +1,11 @@
+{
+    "lambda": 1.0,
+    "num_epochs": 10,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "validation_interval": 1,
+    "train_data_path": "data/train2017",
+    "val_data_path": "data/val2017",
+    "max_side": 768,
+    "checkpoint_path": "checkpoints"
+}
