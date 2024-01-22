@@ -3,10 +3,9 @@ import torch.nn as nn
 
 from model import Encoder, Decoder
 from dataloader import get_dataloader
-from config import default_config as config
 
 class Trainer:
-    def __init__(self, depth):
+    def __init__(self, config, depth):
         assert 1 <= depth <= 5
         self.depth = int(depth)
         self.lambda_value = config['lambda']
@@ -18,7 +17,7 @@ class Trainer:
         self.num_epochs = config['num_epochs']
         self.batch_size = config['batch_size']
         self.lr = config['learning_rate']
-        self.val_interval = 
+        self.val_interval = config['validation_interval']
 
         self.train_dataloader = self.get_dataloader(
             root_dir=config['train_data_path'],
@@ -69,7 +68,7 @@ class Trainer:
                 self.optimizer.step()
 
             # Validation
-            if (epoch + 1) % config['validation_interval'] == 0:
+            if (epoch + 1) % self.val_interval == 0:
                 self.decoder.eval()
                 val_loss = self._validate()
 
