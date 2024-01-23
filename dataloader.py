@@ -6,6 +6,7 @@ from torch.utils.data import Dataset, DataLoader
 
 class UnpairedDataset(Dataset):
 	def __init__(self, root_dir, max_side=768):
+		super(UnpairedDataset, self).__init__()
 		self.root_dir = root_dir
 		self.max_side = max_side
 		self.images = os.listdir(root_dir)
@@ -36,15 +37,57 @@ class UnpairedDataset(Dataset):
 		return len(self.images)
 
 	def __getitem__(self, idx):
-		img_name = os.path.join(self.root_dir, self.images[idx])
-		image = Image.open(img_name).convert('RGB')
+		img_path = os.path.join(self.root_dir, self.images[idx])
+		image = Image.open(img_path).convert('RGB')
 		image = self._resize_and_pad(image)
 		if self.transform:
 			image = self.transform(image)
 		return image
+
+
+class PairedDataset(Dataset):
+	def __init__(self, content_dir, style_dir):
+		super(PairedDataset, self).__init__()
+
+		self.content_dir = content_dir
+		self.style_dir = style_dir
+		self.pairs = []
+
+		for style in os.listdir(style_dir):
+			for content in os.listdir(content_dir):
+				self.pairs.append({'content': content, 'style': style})
+
+		self.transform = transforms.Compose([
+			transforms.ToTensor(),
+		])
+
+	def __len__(self):
+		return len(self.pairs)
+
+	def __getitem__(self, idx):
+		content_name = self.pairs[idx]['content']
+		content_path = os.path.join(self.content_dir, content_name)
+		content = Image.open(content_path).convert('RGB')
+		
+		style_name = self.pairs[idx]['style']
+		style_path = os.path.join(self.style_dir, style_name)
+		style = Image.open(style_path).convert('RGB')
+		
+		if self.transform:
+			content = self.transform(content)
+			style = self.transform(style)
+
+		content_name = '.'.join(content_name.split('.')[:-1])
+		style_name = '.'.join(style_name.split('.')[:-1])
+		return {'content': content, 'style': style, 'content_name': content_name, 'style_name': style_name}
+
 
 def get_dataloader(root_dir, batch_size, max_side=768, is_validation=False):
 	dataset = UnpairedDataset(root_dir=root_dir, max_side=max_side)
 	dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=not is_validation)
 	return dataloader
 
+def get_stylization_dataloader(content_dir, style_dir):
+	dataset = PairedDataset(content_dir=content_dir, style_dir=style_dir)
+	dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
+	return dataloader
