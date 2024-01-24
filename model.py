@@ -42,15 +42,16 @@ class StylizationModel(nn.Module):
 	def __init__(self, level='single', strength=1., depth=4, device='cpu'):
 		super(StylizationModel, self).__init__()
 		assert 0 <= strength <= 1, 'Stylization strength should be in the range [0, 1].'
+		assert 1 <= depth <= 5
+
 		self.strength = strength
 		self.device = device # advised to do SVD on CPU
 		if level == 'single':
-			assert 1 <= depth <= 5
 			self.encoders = [Encoder(depth)]
 			self.decoders = [Decoder(depth)]
 		else:
-			self.encoders = [Encoder(d) for d in range(len(encoders), 0, -1)]
-			self.decoders = [Decoder(d) for d in range(len(decoders), 0, -1)]
+			self.encoders = [Encoder(d) for d in range(depth, 0, -1)]
+			self.decoders = [Decoder(d) for d in range(depth, 0, -1)]
 
 	def forward(self, content, style):
 		device = content.device
