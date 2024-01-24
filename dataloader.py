@@ -1,15 +1,21 @@
 import os
 import torch
+import numpy as np
+
 from PIL import Image
+from tqdm import tqdm
+
 from torchvision import transforms, datasets
 from torch.utils.data import Dataset, DataLoader
 
 class UnpairedDataset(Dataset):
-	def __init__(self, root_dir, max_side=768):
+	def __init__(self, root_dir, max_side=768, max_data=None):
 		super(UnpairedDataset, self).__init__()
 		self.root_dir = root_dir
 		self.max_side = max_side
 		self.images = os.listdir(root_dir)
+		if max_data:
+			self.images = np.random.choice(self.images, size=max_data, replace=False)
 		self.transform = transforms.Compose([
 			transforms.Lambda(lambda x: self._resize_and_pad(x)),
 			transforms.ToTensor(),
@@ -53,7 +59,8 @@ class PairedDataset(Dataset):
 		self.style_dir = style_dir
 		self.pairs = []
 
-		for style in os.listdir(style_dir):
+		print('Creating paired dataset...')
+		for style in tqdm(os.listdir(style_dir)):
 			for content in os.listdir(content_dir):
 				self.pairs.append({'content': content, 'style': style})
 
@@ -82,8 +89,8 @@ class PairedDataset(Dataset):
 		return {'content': content, 'style': style, 'content_name': content_name, 'style_name': style_name}
 
 
-def get_dataloader(root_dir, batch_size, max_side=768, is_validation=False):
-	dataset = UnpairedDataset(root_dir=root_dir, max_side=max_side)
+def get_dataloader(root_dir, batch_size, max_side=768, is_validation=False, max_data=None):
+	dataset = UnpairedDataset(root_dir=root_dir, max_side=max_side, max_data=max_data)
 	dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=not is_validation)
 	return dataloader
 

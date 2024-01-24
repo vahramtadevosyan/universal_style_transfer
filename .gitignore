@@ -3,3 +3,5 @@ data/val2017/
 models/
 results/
 checkpoints/
+data/contents/
+data/styles/

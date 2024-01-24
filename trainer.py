@@ -1,16 +1,19 @@
 import os
 import torch
+import numpy as np
 from tqdm import tqdm
 from torch.nn import MSELoss, DataParallel
 
 from model import Encoder, Decoder
 from dataloader import get_dataloader
 
+
 class Trainer:
     def __init__(self, config, depth):
         assert 1 <= depth <= 5
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        
+        self._seed_everything(config['seed'])
+
         self.depth = int(depth)
         self.encoder = Encoder(depth, load_weights=True).to(self.device)
         self.decoder = Decoder(depth, load_weights=False).to(self.device)
@@ -29,6 +32,7 @@ class Trainer:
             root_dir=config['train_data_path'],
             batch_size=self.batch_size,
             max_side=config['max_side'],
+            max_data=config['max_data'],
         )
         self.val_dataloader = get_dataloader(
             root_dir=config['val_data_path'],
@@ -118,4 +122,13 @@ class Trainer:
         avg_val_loss = total_val_loss / len(self.val_dataloader)
         return avg_val_loss
 
+    def _seed_everything(self, seed):
+        seed = 42
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+
+        if torch.cuda.is_available():
+            torch.cuda.manual_seed(seed)
+            torch.backends.cudnn.deterministic = True
+            torch.backends.cudnn.benchmark = False
 

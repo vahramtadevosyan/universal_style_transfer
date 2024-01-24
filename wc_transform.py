@@ -1,8 +1,8 @@
 import torch
 
 def whitening_coloring_transform(content_feature, style_feature, strength=1., eps=1e-5):
-	f_c = content_feature.double()
-	f_s = style_feature.double()
+	f_c = content_feature
+	f_s = style_feature
 
 	assert len(f_c.shape) == len(f_s.shape) and len(f_s.shape) == 3, 'Does not support batch processing.'
 	assert 0 <= strength <= 1, 'Stylization strength should be in the range [0, 1].'
@@ -17,15 +17,15 @@ def whitening_coloring_transform(content_feature, style_feature, strength=1., ep
 
 	# centering the features around 0 mean
 	M_c = torch.mean(f_c_flat, -1).unsqueeze(-1)
-	M_s = torch.mean(f_c_flat, -1).unsqueeze(-1)
+	M_s = torch.mean(f_s_flat, -1).unsqueeze(-1)
 	f_c_flat = f_c_flat - M_c
 	f_s_flat = f_s_flat - M_s
 
 	# SVD for covaraince matrices of features
 	cov_c = (f_c_flat @ f_c_flat.T) / (H_c * W_c - 1)
 	cov_s = (f_s_flat @ f_s_flat.T) / (H_s * W_s - 1)
-	U_c, S_c, V_c = torch.svd(c_covm, some=False)
-	U_s, S_s, V_s = torch.svd(s_covm, some=False)
+	_, S_c, V_c = torch.svd(cov_c, some=False)
+	_, S_s, V_s = torch.svd(cov_s, some=False)
 
 	# Eigenvalues of covariance matrices of features
 	n_evalues_c = C_c
@@ -40,7 +40,7 @@ def whitening_coloring_transform(content_feature, style_feature, strength=1., ep
 			n_evalues_s = i
 	
 	D_c = torch.diag((S_c[:n_evalues_c]).pow(-0.5))
-	D_s = torch.diag((S_s[:n_evalues_s]).pow(-0.5))
+	D_s = torch.diag((S_s[:n_evalues_s]).pow(0.5))
 
 	# whitening transform
 	f_c_whitened = V_c[:, :n_evalues_c] @ D_c
@@ -60,5 +60,5 @@ def whitening_coloring_transform(content_feature, style_feature, strength=1., ep
 
 	# applying stylization strength
 	stylized = strength * f_cs + (1.0 - strength) * f_c
-	
+
 	return stylized
