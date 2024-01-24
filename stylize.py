@@ -38,7 +38,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Training script for the model.')
     parser.add_argument('--level', type=str, default='single', choices=['single', 'multi'], help='Level of style transfer.')
     parser.add_argument('--depth', type=int, default=4, choices=[1, 2, 3, 4, 5], help='Depth of the model for single level.')
-    parser.add_argument('--strength', type=float, default=0.2, help='Strength of stylization. Should be in the range [0, 1].')
+    parser.add_argument('--strength', type=float, default=None, help='Strength of stylization. Should be in the range [0, 1].')
     parser.add_argument('--content_dir', type=str, default='data/contents', help='Directory for the content images.')
     parser.add_argument('--style_dir', type=str, default='data/styles', help='Directory for the style images.')
     parser.add_argument('--output_dir', type=str, default='results/', help='Directory for the stylized images.')

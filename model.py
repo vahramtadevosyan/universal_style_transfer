@@ -41,10 +41,16 @@ class Decoder(nn.Module):
 class StylizationModel(nn.Module):
 	def __init__(self, level='single', strength=1., depth=4, device='cpu'):
 		super(StylizationModel, self).__init__()
-		assert 0 <= strength <= 1, 'Stylization strength should be in the range [0, 1].'
 		assert 1 <= depth <= 5
 
-		self.strength = strength
+		if strength:
+			assert 0 <= strength <= 1, 'Stylization strength should be in the range [0, 1].'
+			self.strength = strength
+		elif level == 'single':
+			self.strength = 1.
+		else:
+			self.strength = 0.2 * depth
+
 		self.device = device # advised to do SVD on CPU
 		if level == 'single':
 			self.encoders = [Encoder(depth)]
