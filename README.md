@@ -9,7 +9,7 @@ In order to work with the code in this repository, run the following commands in
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-<br><br>
+The package versions are tested out on Python 3.9.14.<br><br>
 
 ## Training
 
