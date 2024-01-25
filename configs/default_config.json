@@ -1,6 +1,6 @@
 {
     "max_data": 60000,
-    "seed": 42,
+    "seed": 13,
     "lambda": 1.0,
     "num_epochs": 20,
     "batch_size": 32,
