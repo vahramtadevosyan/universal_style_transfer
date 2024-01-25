@@ -30,11 +30,21 @@ cd ..
 In order to start the training, run the following command:
 
 ```bash
-python train.py --config /path/to/config/file.json --depth 1
+python train.py --config /path/to/config/file.json --depth X
 ```
 
 * The `--config` argument specifies the path to the configuration file. The default configuration file is at `configs/default_config.json`. In order to use a custom configuration, create a `.json` file and pass its path to this argument.
-* The `--depth` argument specifies the depth of the decoder to be trained. Depth has to be an integer from the set `{1, 2, 3, 4, 5}`.<br><br><br>
+* The `--depth` argument specifies the depth of the decoder to be trained. `X` has to be an integer from the set `{1, 2, 3, 4, 5}`.
+
+### Resume training from a checkpoint
+
+In case you want to initialize the weights of the decoder from a specific path, run the following command:
+
+```bash
+python train.py --config /path/to/config/file.json --depth X --resume
+```
+
+* If `config["checkpoint_path"]` contains a file of decoder weights, the weight initialization would start from those weights. Otherwise, the default model at `models/decoders/decoderX.pth` will be loaded.<br><br><br>
 
 ## Style Transfer
 
@@ -48,7 +58,7 @@ Single-level style transfer uses only the encoder and the decoder at the specifi
 python stylize.py --level single --depth X --strength 1.0 --content_dir /path/to/content/directory --style_dir /path/to/style/directory --output_dir /path/to/output/directory
 ```
 
-* The `--depth` argument specifies the depth of the single encoder-decoder model. Depth has to be an integer from the set `{1, 2, 3, 4}`.
+* The `--depth` argument specifies the depth of the single encoder-decoder model. `X` has to be an integer from the set `{1, 2, 3, 4}`.
 * The `--strength` argument specifies the strength of stylization. It has to be a floating-point number in the range `[0, 1]`. For single-level style transfer, it is recommended to have `--strength 1.0`, which is the default behavior of the framework.
 * The `--content_dir`, `--style_dir`, and `--output_dir` arguments specify the directories of content images, style images, and the stylized content images (style transfer results), respectively.
 
@@ -60,7 +70,7 @@ Multi-level style transfer uses the encoder(s) and the decoder(s) from depth 1 u
 python stylize.py --level multi --depth X --strength 0.6 --content_dir /path/to/content/directory --style_dir /path/to/style/directory --output_dir /path/to/output/directory
 ```
 
-* The `--depth` argument specifies the depth of the largest encoder-decoder model to be used. Depth has to be an integer from the set `{1, 2, 3, 4}`.
+* The `--depth` argument specifies the depth of the largest encoder-decoder model to be used. `X` has to be an integer from the set `{1, 2, 3, 4}`.
 * The `--strength` argument specifies the strength of stylization. It has to be a floating-point number in the range `[0, 1]`. For multi-level style transfer with depth `X`, it is recommended to have `--strength 0.2*X`, which is the default behavior of the framework.
 * The `--content_dir`, `--style_dir`, and `--output_dir` arguments specify the directories of content images, style images, and the stylized content images (style transfer results), respectively.<br><br>
 
