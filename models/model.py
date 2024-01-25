@@ -5,41 +5,45 @@ from torchvision import transforms
 from models.encoders import encoders
 from models.decoders import decoders
 
-from utils import whitening_coloring_transform
+from utils import whitening_coloring_transform, DEFAULT_ENCODER_DIR, DEFAULT_DECODER_DIR
 
 
 class Encoder(nn.Module):
-	def __init__(self, depth, load_weights=True):
+	def __init__(self, depth, load_weights=True, checkpoint_path=None):
 		super(Encoder, self).__init__()
 		self.depth = depth
 		self.model = encoders[depth-1]
+		self.checkpoint_path = checkpoint_path if checkpoint_path else DEFAULT_ENCODER_DIR + f'{self.depth}.pth'
+
 		if load_weights:
-			state_dict = torch.load(f'models/encoders/encoder{self.depth}.pth')
+			state_dict = torch.load(self.checkpoint_path)
 			state_dict = {'.'.join(k.split('.')[-2:]): v for k, v in state_dict.items()}			
 			self.model.load_state_dict(state_dict)
+			print(f'Loaded encoder checkpoint at: {self.checkpoint_path}')
 
 	def forward(self, x):
 		return self.model(x)
 
 
 class Decoder(nn.Module):
-	def __init__(self, depth, load_weights=True):
+	def __init__(self, depth, load_weights=True, checkpoint_path=None):
 		super(Decoder, self).__init__()
 		self.depth = depth
 		self.model = decoders[depth-1]
+		self.checkpoint_path = checkpoint_path if checkpoint_path else DEFAULT_DECODER_DIR + f'{self.depth}.pth'
+
 		if load_weights:
-			print(f'Loaded checkpoint at: checkpoints/decoder{self.depth}.pth')
-			state_dict = torch.load(f'checkpoints/decoder{self.depth}.pth')
-			# state_dict = torch.load(f'models/decoders/decoder{self.depth}.pth')
+			state_dict = torch.load(self.checkpoint_path)
 			state_dict = {'.'.join(k.split('.')[-2:]): v for k, v in state_dict.items()}
 			self.model.load_state_dict(state_dict)
+			print(f'Loaded decoder checkpoint at: {self.checkpoint_path}')
 
 	def forward(self, x):
 		return self.model(x)
 
 
 class StylizationModel(nn.Module):
-	def __init__(self, level='single', strength=1., depth=4, device='cpu'):
+	def __init__(self, level='single', strength=1., depth=4, device='cpu', decoder_checkpoint_path=None):
 		super(StylizationModel, self).__init__()
 
 		if strength:
@@ -53,10 +57,10 @@ class StylizationModel(nn.Module):
 		self.device = device # advised to do SVD on CPU
 		if level == 'single':
 			self.encoders = [Encoder(depth)]
-			self.decoders = [Decoder(depth)]
+			self.decoders = [Decoder(depth, checkpoint_path=decoder_checkpoint_path)]
 		else:
-			self.encoders = [Encoder(d) for d in range(depth, 0, -1)]
-			self.decoders = [Decoder(d) for d in range(depth, 0, -1)]
+			self.encoders = [Encoder(d, checkpoint_path=decoder_checkpoint_path) for d in range(depth, 0, -1)]
+			self.decoders = [Decoder(d, checkpoint_path=decoder_checkpoint_path) for d in range(depth, 0, -1)]
 
 	def forward(self, content, style):
 		device = content.device

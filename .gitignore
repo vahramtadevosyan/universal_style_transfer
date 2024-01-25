@@ -1,5 +1,4 @@
 data/train2017/
 data/val2017/
-models/decoders
 checkpoints/
 __pycache__/

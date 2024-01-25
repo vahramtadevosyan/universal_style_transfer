@@ -1,6 +1,8 @@
 import torch
 import numpy as np
 
+DEFAULT_ENCODER_DIR = 'models/encoders/encoder'
+DEFAULT_DECODER_DIR = 'models/decoders/decoder'
 
 def whitening_coloring_transform(content_feature, style_feature, strength=1., eps=1e-5):
 	f_c = content_feature

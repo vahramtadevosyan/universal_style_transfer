@@ -22,8 +22,13 @@ class Trainer:
         seed_everything(config['seed'])
 
         self.depth = int(depth)
+        self.checkpoint_dir = config['checkpoint_path']
+        os.makedirs(self.checkpoint_dir, exist_ok=True)
+        self.checkpoint_path = os.path.join(self.checkpoint_dir, f'decoder{self.depth}.pth')
+        resume_checkpoint_path = self.checkpoint_path if os.path.exists(self.checkpoint_path) else None
+
         self.encoder = Encoder(depth, load_weights=True).to(self.device)
-        self.decoder = Decoder(depth, load_weights=resume).to(self.device)
+        self.decoder = Decoder(depth, load_weights=resume, checkpoint_path=resume_checkpoint_path).to(self.device)
         self.encoder.eval()
 
         if torch.cuda.device_count() > 1:
@@ -52,9 +57,7 @@ class Trainer:
         self.optimizer = torch.optim.Adam(self.decoder.parameters(), lr=self.lr)
 
         self.best_val_loss = self._validate() if resume else float('inf')
-        self.checkpoint_dir = config['checkpoint_path']
-        os.makedirs(self.checkpoint_dir, exist_ok=True)
-        self.checkpoint_path = os.path.join(self.checkpoint_dir, f'decoder{self.depth}.pth')
+
         
         print(f'Current validation loss: {self.best_val_loss}')
         print(f'Starting the training with resolution {config["max_side"]} on {self.device} device...')

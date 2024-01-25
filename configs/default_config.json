@@ -9,5 +9,5 @@
     "train_data_path": "data/train2017",
     "val_data_path": "data/val2017",
     "max_side": 512,
-    "checkpoint_path": "checkpoints2"
+    "checkpoint_path": "checkpoints"
 }
