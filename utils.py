@@ -1,4 +1,6 @@
 import torch
+import numpy as np
+
 
 def whitening_coloring_transform(content_feature, style_feature, strength=1., eps=1e-5):
 	f_c = content_feature
@@ -62,3 +64,12 @@ def whitening_coloring_transform(content_feature, style_feature, strength=1., ep
 	stylized = strength * f_cs + (1.0 - strength) * f_c
 
 	return stylized
+
+
+def seed_everything(seed=42):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)	
+

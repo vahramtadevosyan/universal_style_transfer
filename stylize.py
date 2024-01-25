@@ -4,7 +4,7 @@ import argparse
 from tqdm import tqdm
 from torchvision import transforms
 
-from model import StylizationModel
+from models.model import StylizationModel
 from dataloader import get_stylization_dataloader
 
 def main(args):

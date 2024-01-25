@@ -2,16 +2,16 @@ import torch
 import torch.nn as nn
 from torchvision import transforms
 
-from encoders import encoders
-from decoders import decoders
+from models.encoders import encoders
+from models.decoders import decoders
 
-from wc_transform import whitening_coloring_transform
+from utils import whitening_coloring_transform
+
 
 class Encoder(nn.Module):
 	def __init__(self, depth, load_weights=True):
 		super(Encoder, self).__init__()
-		assert 1 <= depth <= 5
-		self.depth = int(depth)
+		self.depth = depth
 		self.model = encoders[depth-1]
 		if load_weights:
 			state_dict = torch.load(f'models/encoders/encoder{self.depth}.pth')
@@ -25,8 +25,7 @@ class Encoder(nn.Module):
 class Decoder(nn.Module):
 	def __init__(self, depth, load_weights=True):
 		super(Decoder, self).__init__()
-		assert 1 <= depth <= 5
-		self.depth = int(depth)
+		self.depth = depth
 		self.model = decoders[depth-1]
 		if load_weights:
 			print(f'Loaded checkpoint at: checkpoints/decoder{self.depth}.pth')
@@ -42,7 +41,6 @@ class Decoder(nn.Module):
 class StylizationModel(nn.Module):
 	def __init__(self, level='single', strength=1., depth=4, device='cpu'):
 		super(StylizationModel, self).__init__()
-		assert 1 <= depth <= 5
 
 		if strength:
 			assert 0 <= strength <= 1, 'Stylization strength should be in the range [0, 1].'
