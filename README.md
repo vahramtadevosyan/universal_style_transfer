@@ -53,6 +53,282 @@ python stylize.py --level multi --depth X --strength 0.6 --content_dir /path/to/
 
 * The `--depth` argument specifies the depth of the largest encoder-decoder model to be used. Depth has to be an integer from the set `{1, 2, 3, 4, 5}`.
 * The `--strength` argument specifies the strength of stylization. It has to be a floating-point number in the range `[0, 1]`. For multi-level style transfer with depth `X`, it is recommended to have `--strength 0.2*X`, which is the default behavior of the framework.
-* The `--content_dir`, `--style_dir`, and `--output_dir` arguments specify the directories of content images, style images, and the stylized content images (style transfer results), respectively.
+* The `--content_dir`, `--style_dir`, and `--output_dir` arguments specify the directories of content images, style images, and the stylized content images (style transfer results), respectively.<br><br>
 
-  
+## Results
+
+### Single-Level Style Transfer
+
+<details>
+<summary>Depth 1</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-1/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Depth 2</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-2/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Depth 3</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-3/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Depth 4</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-4/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Depth 5</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/single-level/depth-5/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details><br><br>
+
+### Multi-Level Style Transfer
+
+<details>
+<summary>Maximum depth 2</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-2/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Maximum depth 3</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-3/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Maximum depth 4</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-4/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details>
+<details>
+<summary>Maximum depth 5</summary>
+<br>
+<table class="center">
+<tr>
+  <td width=25% align="center"></td>
+  <td width=25% align="center"><img src="data/contents/face.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="data/contents/in4.jpg" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/brick.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_brick/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_brick/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_brick/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/in1.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_in1/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_in1/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_in1/in4.png" raw=true></td>
+</tr>
+<tr>
+  <td width=25% align="center"><img src="data/styles/tiger.jpg" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_tiger/face.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_tiger/in1.png" raw=true></td>
+  <td width=25% align="center"><img src="results/multi-level/depth-5/style_tiger/in4.png" raw=true></td>
+</tr>  
+</table>
+</details><br><br>
