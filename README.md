@@ -178,36 +178,6 @@ python stylize.py --level multi --depth X --strength 0.6 --content_dir /path/to/
   <td width=25% align="center"><img src="__assets__/results/single-level/depth-4/style_tiger/in4.png" raw=true></td>
 </tr>  
 </table>
-</details>
-<details>
-<summary>Depth 5</summary>
-<br>
-<table class="center">
-<tr>
-  <td width=25% align="center"></td>
-  <td width=25% align="center"><img src="__assets__/contents/face.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/contents/in1.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/contents/in4.jpg" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/brick.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_brick/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_brick/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_brick/in4.png" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/in1.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_in1/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_in1/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_in1/in4.png" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/tiger.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_tiger/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_tiger/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/single-level/depth-5/style_tiger/in4.png" raw=true></td>
-</tr>  
-</table>
 </details><br><br>
 
 ### Multi-Level Style Transfer
@@ -299,36 +269,6 @@ python stylize.py --level multi --depth X --strength 0.6 --content_dir /path/to/
   <td width=25% align="center"><img src="__assets__/results/multi-level/depth-4/style_tiger/face.png" raw=true></td>
   <td width=25% align="center"><img src="__assets__/results/multi-level/depth-4/style_tiger/in1.png" raw=true></td>
   <td width=25% align="center"><img src="__assets__/results/multi-level/depth-4/style_tiger/in4.png" raw=true></td>
-</tr>  
-</table>
-</details>
-<details>
-<summary>Maximum depth 5</summary>
-<br>
-<table class="center">
-<tr>
-  <td width=25% align="center"></td>
-  <td width=25% align="center"><img src="__assets__/contents/face.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/contents/in1.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/contents/in4.jpg" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/brick.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_brick/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_brick/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_brick/in4.png" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/in1.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_in1/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_in1/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_in1/in4.png" raw=true></td>
-</tr>
-<tr>
-  <td width=25% align="center"><img src="__assets__/styles/tiger.jpg" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_tiger/face.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_tiger/in1.png" raw=true></td>
-  <td width=25% align="center"><img src="__assets__/results/multi-level/depth-5/style_tiger/in4.png" raw=true></td>
 </tr>  
 </table>
 </details><br><br>
