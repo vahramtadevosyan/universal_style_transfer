@@ -332,3 +332,14 @@ python stylize.py --level multi --depth X --strength 0.6 --content_dir /path/to/
 </tr>  
 </table>
 </details><br><br>
+
+## Citation
+
+```
+@inproceedings{WCT-NIPS-2017,
+    author = {Li, Yijun and Fang, Chen and Yang, Jimei and Wang, Zhaowen and Lu, Xin and Yang, Ming-Hsuan},
+    title = {Universal Style Transfer via Feature Transforms},
+    booktitle = {Advances in Neural Information Processing Systems},
+    year = {2017}
+}
+```
