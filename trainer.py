@@ -9,14 +9,14 @@ from dataloader import get_dataloader
 
 
 class Trainer:
-    def __init__(self, config, depth, continue=False):
+    def __init__(self, config, depth, resume=False):
         assert 1 <= depth <= 5
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self._seed_everything(config['seed'])
 
         self.depth = int(depth)
         self.encoder = Encoder(depth, load_weights=True).to(self.device)
-        self.decoder = Decoder(depth, load_weights=continue).to(self.device)
+        self.decoder = Decoder(depth, load_weights=resume).to(self.device)
         self.encoder.eval()
 
         if torch.cuda.device_count() > 1:
@@ -44,7 +44,7 @@ class Trainer:
         self.criterion = MSELoss()
         self.optimizer = torch.optim.Adam(self.decoder.parameters(), lr=self.lr)
 
-        self.best_val_loss = self._validate() if continue else float('inf')
+        self.best_val_loss = self._validate() if resume else float('inf')
         self.checkpoint_dir = config['checkpoint_path']
         os.makedirs(self.checkpoint_dir, exist_ok=True)
         self.checkpoint_path = os.path.join(self.checkpoint_dir, f'decoder{self.depth}.pth')

@@ -16,8 +16,11 @@ def main(args):
     model = model.to(device)
     model.eval()
         
-    print(f'Starting the style transfer on {device} device...')
-    print(f'Stylization level `{args.level}` with strength {args.strength}' + ('' if args.level == 'multi' else f' and depth {args.depth}'))
+    log = f'Starting the style transfer on {device} device...\n'
+    log += f'Stylization level `{args.level}` with' + ' maximum' if args.level == 'multi' else ''
+    log += f' depth {args.depth}\nStylization strength: '
+    log += f'{args.strength}' if args.strength else 'default'
+    print(log)
     print(f'Content directory: {args.content_dir}')
     print(f'Style directory: {args.style_dir}\n')
 
@@ -25,11 +28,11 @@ def main(args):
         for inputs in tqdm(dataloader):
             content, style = inputs['content'], inputs['style']
             content_name, style_name = inputs['content_name'][0], inputs['style_name'][0]
-            output_path = os.path.join(args.output_dir, 'style_'+style_name)
-            os.makedirs(output_path, exist_ok=True)
+            output_dir = os.path.join(args.output_dir, f'{args.level}-level', f'depth-{args.depth}', 'style_'+style_name)
+            os.makedirs(output_dir, exist_ok=True)
             stylized_image = model(content=content, style=style)
             stylized_image = transforms.ToPILImage()(stylized_image.cpu())
-            stylized_image.save(os.path.join(output_path, f'{content_name}.png'))
+            stylized_image.save(os.path.join(output_dir, f'{content_name}.png'))
             
     print(f'Done! Output directory: {args.output_dir}')
 
