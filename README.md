@@ -2,6 +2,15 @@
 
 This repository is a PyTorch implementation of the paper [Universal Style Transfer via Feature Transforms](https://proceedings.neurips.cc/paper_files/paper/2017/file/49182f81e6a13cf5eaa496d51fea6406-Paper.pdf) [NIPS 2017].<br><br>
 
+## Installation
+
+In order to work with the code in this repository, run the following commands in your virtual environment:
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+<br><br>
+
 ## Training
 
 For the Universal Style Transfer framework to work, one needs to train up to 5 decoders for the pre-trained VGG-19 encoders, cut off at up to 5 different depths. For the training, one needs to download the [MS COCO](https://cocodataset.org/#home) training and validation datasets, and make sure that the model for the encoder at depth X has the following path: `models/encoders/encoderX.pth`.<br>
