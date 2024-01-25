@@ -29,6 +29,7 @@ class Decoder(nn.Module):
 		self.depth = int(depth)
 		self.model = decoders[depth-1]
 		if load_weights:
+			print(f'Loaded checkpoint at: checkpoints/decoder{self.depth}.pth')
 			state_dict = torch.load(f'checkpoints/decoder{self.depth}.pth')
 			# state_dict = torch.load(f'models/decoders/decoder{self.depth}.pth')
 			state_dict = {'.'.join(k.split('.')[-2:]): v for k, v in state_dict.items()}
