@@ -3,4 +3,3 @@ data/val2017/
 models/decoders
 checkpoints/
 __pycache__/
-.gitignore
